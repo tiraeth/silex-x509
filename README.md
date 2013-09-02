@@ -1,6 +1,8 @@
 X.509 Authentication Security Provider
 =============================
 
+[![Build Status](https://travis-ci.org/tiraeth/silex-x509.png)](https://travis-ci.org/tiraeth/silex-x509)
+
 The X509AuthenticationProvider provides a X.509 Authentication Listener and bootstraps it so you can easily implement X.509 Certificate authentication in your Silex application.
 
 Parameters
