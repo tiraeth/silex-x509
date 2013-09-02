@@ -1,0 +1,25 @@
+{
+    "package": "mach/silex-x509",
+    "type": "library",
+    "description": "X.509 Authentication Provider for Silex",
+    "keywords": [],
+    "homepage": "http://github.com/tiraeth/silex-x509",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Marcin Chwedziak",
+            "email": "marcin@chwediak.pl"
+        }
+    ],
+    "require": {
+        "silex/silex": "*",
+        "symfony/security": "~2.3"
+    },
+    "require-dev": {
+        "symfony/browser-kit": "~2.3",
+        "phpunit/phpunit": "~3.7"
+    },
+    "autoload": {
+        "psr-0": { "Mach\\Silex\\X509\\": "src/" }
+    }
+}
