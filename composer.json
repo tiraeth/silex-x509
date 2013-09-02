@@ -1,5 +1,5 @@
 {
-    "package": "mach/silex-x509",
+    "name": "mach/silex-x509",
     "type": "library",
     "description": "X.509 Authentication Provider for Silex",
     "keywords": [],
