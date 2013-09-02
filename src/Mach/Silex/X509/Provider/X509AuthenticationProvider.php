@@ -26,10 +26,8 @@ class X509AuthenticationProvider implements ServiceProviderInterface
 {
     public function register(Application $app)
     {
-        $app['security.x509'] = array(
-            'client_key' => 'SSL_CLIENT_S_DN_Email',
-            'credentials_key' => 'SSL_CLIENT_S_DN',
-        );
+        $app['security.x509.client_key'] = 'SSL_CLIENT_S_DN_Email';
+        $app['security.x509.credentials_key'] = 'SSL_CLIENT_S_DN';
         
         $app['security.authentication_listener.factory.x509'] = $app->protect(function($name, $options) use ($app) {
             if (!isset($app['security.entry_point.'.$name.'.x509'])) {
@@ -58,8 +56,8 @@ class X509AuthenticationProvider implements ServiceProviderInterface
                     $app['security'],
                     $app['security.authentication_manager'],
                     $providerKey,
-                    $app['security.x509']['client_key'],
-                    $app['security.x509']['credentials_key'],
+                    $app['security.x509.client_key'],
+                    $app['security.x509.credentials_key'],
                     $app['logger'],
                     $app['dispatcher']
                 );

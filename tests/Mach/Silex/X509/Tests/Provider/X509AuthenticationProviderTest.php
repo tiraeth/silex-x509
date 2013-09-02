@@ -78,10 +78,8 @@ class X509AuthenticationProviderTest extends WebTestCase
         ));
 
         $app->register(new X509AuthenticationProvider(), array(
-            'security.x509' => array(
-                'client_key' => 'TestClientKey',
-                'credentials_key' => 'TestCredentialsKey',
-            ),
+            'security.x509.client_key' => 'TestClientKey',
+            'secruity.x509.credentials_key' => 'TestCredentialsKey',
         ));
 
         $app->get('/', function() use ($app) {
