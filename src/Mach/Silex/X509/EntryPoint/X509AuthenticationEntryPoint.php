@@ -13,8 +13,8 @@ namespace Mach\Silex\X509\EntryPoint;
 
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
 use Symfony\Component\Security\Http\EntryPoint\AuthenticationEntryPointInterface;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 
 /**
  * X.509 Authentication Entry Point which basically returns HTTP/1.0 403 Forbidden
@@ -25,9 +25,6 @@ class X509AuthenticationEntryPoint implements AuthenticationEntryPointInterface
 {
     public function start(Request $request, AuthenticationException $authException = null)
     {
-        $response = new Response();
-        $response->setStatusCode(403);
-
-        return $response;
+        throw new AccessDeniedHttpException();
     }
 }

@@ -38,7 +38,7 @@ class X509AuthenticationProviderTest extends WebTestCase
         $client->request('get', '/', array(), array(), array('TestClientKey' => 'dennis@example.com', 'TestCredentialsKey' => 'foo'));
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
         $this->assertEquals('dennis@example.comAUTHENTICATED', $client->getResponse()->getContent());
-        
+
         $client->request('get', '/admin', array(), array(), array('TestClientKey' => 'dennis@example.com', 'TestCredentialsKey' => 'foo'));
         $this->assertEquals(403, $client->getResponse()->getStatusCode());
 
@@ -47,7 +47,7 @@ class X509AuthenticationProviderTest extends WebTestCase
         $client->request('get', '/', array(), array(), array('TestClientKey' => 'admin@example.com', 'TestCredentialsKey' => 'foo'));
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
         $this->assertEquals('admin@example.comAUTHENTICATEDADMIN', $client->getResponse()->getContent());
-        
+
         $client->request('get', '/admin', array(), array(), array('TestClientKey' => 'admin@example.com', 'TestCredentialsKey' => 'foo'));
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
         $this->assertEquals('admin', $client->getResponse()->getContent());
@@ -56,7 +56,7 @@ class X509AuthenticationProviderTest extends WebTestCase
     public function createApplication()
     {
         $app = new Application();
-        $app->register(new SessionServiceProvider());
+        $app['debug'] = true;
 
         $app->register(new SecurityServiceProvider(), array(
             'security.firewalls' => array(
@@ -71,6 +71,7 @@ class X509AuthenticationProviderTest extends WebTestCase
             ),
             'security.access_rules' => array(
                 array('^/admin', 'ROLE_ADMIN'),
+                array('^/.*$', 'ROLE_USER'),
             ),
             'security.role_hierarchy' => array(
                 'ROLE_ADMIN' => array('ROLE_USER'),
