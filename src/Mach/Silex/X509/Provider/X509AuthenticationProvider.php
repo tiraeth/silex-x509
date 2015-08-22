@@ -12,8 +12,8 @@
 namespace Mach\Silex\X509\Provider;
 
 use Mach\Silex\X509\EntryPoint\X509AuthenticationEntryPoint;
-use Silex\Application;
-use Silex\ServiceProviderInterface;
+use Pimple\Container;
+use Pimple\ServiceProviderInterface;
 use Symfony\Component\Security\Core\Authentication\Provider\PreAuthenticatedAuthenticationProvider;
 use Symfony\Component\Security\Http\Firewall\X509AuthenticationListener;
 
@@ -24,7 +24,7 @@ use Symfony\Component\Security\Http\Firewall\X509AuthenticationListener;
  */
 class X509AuthenticationProvider implements ServiceProviderInterface
 {
-    public function register(Application $app)
+    public function register(Container $app)
     {
         $app['security.x509.client_key'] = 'SSL_CLIENT_S_DN_Email';
         $app['security.x509.credentials_key'] = 'SSL_CLIENT_S_DN';
@@ -51,9 +51,9 @@ class X509AuthenticationProvider implements ServiceProviderInterface
         });
 
         $app['security.authentication_listener.x509._proto'] = $app->protect(function ($providerKey, $options) use ($app) {
-            return $app->share(function () use ($app, $providerKey, $options) {
+            return function () use ($app, $providerKey, $options) {
                 return new X509AuthenticationListener(
-                    $app['security'],
+                    $app['security.token_storage'],
                     $app['security.authentication_manager'],
                     $providerKey,
                     $app['security.x509.client_key'],
@@ -61,27 +61,23 @@ class X509AuthenticationProvider implements ServiceProviderInterface
                     $app['logger'],
                     $app['dispatcher']
                 );
-            });
+            };
         });
 
         $app['security.authentication_provider.x509._proto'] = $app->protect(function ($name) use ($app) {
-            return $app->share(function () use ($app, $name) {
+            return function () use ($app, $name) {
                 return new PreAuthenticatedAuthenticationProvider(
                     $app['security.user_provider.'.$name],
                     $app['security.user_checker'],
                     $name
                 );
-            });
+            };
         });
 
         $app['security.entry_point.x509._proto'] = $app->protect(function ($name, array $options) use ($app) {
-            return $app->share(function () use ($app, $name, $options) {
+            return function () use ($app, $name, $options) {
                 return new X509AuthenticationEntryPoint();
-            });
+            };
         });
-    }
-
-    public function boot(Application $app)
-    {
     }
 }

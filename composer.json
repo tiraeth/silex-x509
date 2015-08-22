@@ -12,11 +12,11 @@
         }
     ],
     "require": {
-        "silex/silex": "~1.0",
-        "symfony/security": "~2.3"
+        "silex/silex": "~2.0@dev",
+        "symfony/security": "~2.7"
     },
     "require-dev": {
-        "symfony/browser-kit": "~2.3"
+        "symfony/browser-kit": "~2.7"
     },
     "autoload": {
         "psr-0": { "Mach\\Silex\\X509\\": "src/" }
