@@ -18,7 +18,7 @@ use Symfony\Component\Security\Core\Authentication\Provider\PreAuthenticatedAuth
 use Symfony\Component\Security\Http\Firewall\X509AuthenticationListener;
 
 /**
- * X.509 Authentication Security Provider
+ * X.509 Authentication Security Provider.
  *
  * @author Marcin Chwedziak <marcin@chwedziak.pl>
  */
@@ -29,7 +29,7 @@ class X509AuthenticationProvider implements ServiceProviderInterface
         $app['security.x509.client_key'] = 'SSL_CLIENT_S_DN_Email';
         $app['security.x509.credentials_key'] = 'SSL_CLIENT_S_DN';
 
-        $app['security.authentication_listener.factory.x509'] = $app->protect(function($name, $options) use ($app) {
+        $app['security.authentication_listener.factory.x509'] = $app->protect(function ($name, $options) use ($app) {
             if (!isset($app['security.entry_point.'.$name.'.x509'])) {
                 $app['security.entry_point.'.$name.'.x509'] = $app['security.entry_point.x509._proto']($name, $options);
             }
@@ -46,7 +46,7 @@ class X509AuthenticationProvider implements ServiceProviderInterface
                 'security.authentication_provider.'.$name.'.x509',
                 'security.authentication_listener.'.$name.'.x509',
                 'security.entry_point.'.$name.'.x509',
-                'pre_auth'
+                'pre_auth',
             );
         });
 

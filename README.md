@@ -19,7 +19,7 @@ Registering
     use Mach\Silex\X509\Provider\X509AuthenticationProvider;
 
     $app = new Application();
-    
+
     $app->register(new SecurityServiceProvider(), [...]);
 
     $app->register(new X509AuthenticationProvider());
