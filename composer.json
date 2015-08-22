@@ -20,5 +20,11 @@
     },
     "autoload": {
         "psr-0": { "Mach\\Silex\\X509\\": "src/" }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-silex2": "2.0.x-dev",
+            "dev-master": "1.0.x-dev"
+        }
     }
 }
