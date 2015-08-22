@@ -17,7 +17,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 
 /**
- * X.509 Authentication Entry Point which basically returns HTTP/1.0 403 Forbidden
+ * X.509 Authentication Entry Point which basically returns HTTP/1.0 403 Forbidden.
  *
  * @author Marcin Chwedziak <marcin@chwedziak.pl>
  */

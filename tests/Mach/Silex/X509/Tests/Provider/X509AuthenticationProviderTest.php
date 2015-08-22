@@ -15,12 +15,11 @@ use Mach\Silex\X509\Provider\X509AuthenticationProvider;
 use Silex\Application;
 use Silex\WebTestCase;
 use Silex\Provider\SecurityServiceProvider;
-use Silex\Provider\SessionServiceProvider;
 use Symfony\Component\HttpKernel\Client;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
- * X509AuthenticationProvider
+ * X509AuthenticationProvider.
  *
  * @author Marcin Chwedziak <marcin@chwedziak.pl>
  */
@@ -65,7 +64,7 @@ class X509AuthenticationProviderTest extends WebTestCase
                     'x509' => true,
                     'users' => array(
                         'dennis@example.com' => array('ROLE_USER', null),
-                        'admin@example.com'  => array('ROLE_ADMIN', null),
+                        'admin@example.com' => array('ROLE_ADMIN', null),
                     ),
                 ),
             ),
@@ -83,7 +82,7 @@ class X509AuthenticationProviderTest extends WebTestCase
             'secruity.x509.credentials_key' => 'TestCredentialsKey',
         ));
 
-        $app->get('/', function() use ($app) {
+        $app->get('/', function () use ($app) {
             $user = $app['security.token_storage']->getToken()->getUser();
 
             $content = is_object($user) ? $user->getUsername() : 'ANONYMOUS';
@@ -99,7 +98,7 @@ class X509AuthenticationProviderTest extends WebTestCase
             return $content;
         });
 
-        $app->get('/admin', function() use ($app) {
+        $app->get('/admin', function () use ($app) {
             return 'admin';
         });
 
